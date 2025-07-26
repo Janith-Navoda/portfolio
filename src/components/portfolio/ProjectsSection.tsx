@@ -4,6 +4,12 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ExternalLink, Github, Smartphone, Globe } from 'lucide-react';
 
+// Project preview images
+import breezyFitsImg from '@/assets/project-breezy-fits.jpg';
+import craftopiaImg from '@/assets/project-craftopia.jpg';
+import echannelingImg from '@/assets/project-echanneling.jpg';
+import financeTrackerImg from '@/assets/project-finance-tracker.jpg';
+
 const ProjectsSection = () => {
   const projects = [
     {
@@ -15,6 +21,7 @@ const ProjectsSection = () => {
       description: 'Feature-rich shopping experience with admin dashboard, JWT auth, payment integration.',
       liveUrl: '#',
       githubUrl: '#',
+      image: breezyFitsImg,
       type: 'web',
       featured: true
     },
@@ -26,6 +33,7 @@ const ProjectsSection = () => {
       tech: ['MERN', 'Tailwind'],
       description: 'Built from scratch with secure auth, dynamic inventory, order management.',
       githubUrl: '#',
+      image: craftopiaImg,
       type: 'web',
       featured: true
     },
@@ -37,6 +45,7 @@ const ProjectsSection = () => {
       tech: ['Java', 'MySQL'],
       description: 'Team project with appointment scheduling and doctor listing.',
       githubUrl: '#',
+      image: echannelingImg,
       type: 'web',
       featured: false
     },
@@ -48,6 +57,7 @@ const ProjectsSection = () => {
       tech: ['Kotlin'],
       description: 'Personal budgeting tool. Offline expense tracking, budget alerts, SharedPreferences.',
       githubUrl: '#',
+      image: financeTrackerImg,
       type: 'mobile',
       featured: true
     }
@@ -87,39 +97,56 @@ const ProjectsSection = () => {
               className="group bg-surface border-border hover:shadow-glow transition-all duration-500 hover:scale-105 overflow-hidden animate-fade-in-up"
               style={{ animationDelay: `${index * 200}ms` }}
             >
-              <div className="p-8">
+              {/* Project Image */}
+              <div className="relative h-48 overflow-hidden">
+                <img 
+                  src={project.image} 
+                  alt={`${project.title} preview`}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent opacity-60" />
+                
+                {/* Project Type Badge */}
+                <div className="absolute top-4 right-4">
+                  <Badge className="bg-accent/90 text-accent-foreground backdrop-blur-sm">
+                    {project.type === 'web' ? 'Web App' : 'Mobile App'}
+                  </Badge>
+                </div>
+              </div>
+
+              <div className="p-6">
                 {/* Project Header */}
-                <div className="flex items-start justify-between mb-6">
+                <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center gap-3">
                     {project.type === 'web' ? (
-                      <Globe className="w-6 h-6 text-accent-bright" />
+                      <Globe className="w-5 h-5 text-accent-bright" />
                     ) : (
-                      <Smartphone className="w-6 h-6 text-accent-bright" />
+                      <Smartphone className="w-5 h-5 text-accent-bright" />
                     )}
                     <div>
-                      <h3 className="text-xl font-bold group-hover:text-accent-bright transition-colors">
+                      <h3 className="text-lg font-bold group-hover:text-accent-bright transition-colors">
                         {project.title}
                       </h3>
-                      <p className="text-muted-foreground">{project.subtitle}</p>
+                      <p className="text-sm text-muted-foreground">{project.subtitle}</p>
                     </div>
                   </div>
                   
-                  <Badge variant="secondary" className="bg-primary/20 text-primary">
+                  <Badge variant="secondary" className="bg-primary/20 text-primary text-xs">
                     {project.role}
                   </Badge>
                 </div>
 
                 {/* Description */}
-                <p className="text-muted-foreground mb-6 leading-relaxed">
+                <p className="text-muted-foreground mb-4 leading-relaxed text-sm">
                   {project.description}
                 </p>
 
                 {/* Tech Stack */}
-                <div className="flex flex-wrap gap-2 mb-6">
+                <div className="flex flex-wrap gap-2 mb-4">
                   {project.tech.map((tech) => (
                     <Badge
                       key={tech}
-                      className={`${getTechColor(tech)} border`}
+                      className={`${getTechColor(tech)} border text-xs`}
                     >
                       {tech}
                     </Badge>
@@ -127,13 +154,13 @@ const ProjectsSection = () => {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex gap-3">
+                <div className="flex gap-2">
                   {project.liveUrl && (
                     <Button
                       variant="gradient"
                       size="sm"
                       asChild
-                      className="group/btn"
+                      className="group/btn flex-1"
                     >
                       <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                         <ExternalLink className="w-4 h-4 mr-2 group-hover/btn:scale-110 transition-transform" />
@@ -146,7 +173,7 @@ const ProjectsSection = () => {
                     variant="neon"
                     size="sm"
                     asChild
-                    className="group/btn"
+                    className={`group/btn ${project.liveUrl ? 'flex-1' : 'w-full'}`}
                   >
                     <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                       <Github className="w-4 h-4 mr-2 group-hover/btn:rotate-12 transition-transform" />
@@ -157,7 +184,7 @@ const ProjectsSection = () => {
               </div>
               
               {/* Hover Effect Overlay */}
-              <div className="absolute inset-0 bg-gradient-accent opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-gradient-accent opacity-0 group-hover:opacity-5 transition-opacity duration-500" />
             </Card>
           ))}
         </div>
@@ -170,46 +197,67 @@ const ProjectsSection = () => {
             {projects.filter(p => !p.featured).map((project, index) => (
               <Card
                 key={project.id}
-                className="p-6 bg-surface border-border hover:shadow-glow transition-all duration-300 hover:scale-105 animate-fade-in-up"
+                className="group bg-surface border-border hover:shadow-glow transition-all duration-300 hover:scale-105 overflow-hidden animate-fade-in-up"
                 style={{ animationDelay: `${(index + 4) * 200}ms` }}
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    {project.type === 'web' ? (
-                      <Globe className="w-5 h-5 text-accent-bright" />
-                    ) : (
-                      <Smartphone className="w-5 h-5 text-accent-bright" />
-                    )}
-                    <div>
-                      <h4 className="font-semibold">{project.title}</h4>
-                      <p className="text-sm text-muted-foreground">{project.subtitle}</p>
-                    </div>
-                  </div>
+                {/* Project Image */}
+                <div className="relative h-32 overflow-hidden">
+                  <img 
+                    src={project.image} 
+                    alt={`${project.title} preview`}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent opacity-60" />
                   
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 rounded-full hover:bg-accent/20 transition-colors"
-                  >
-                    <Github className="w-4 h-4 text-accent-bright" />
-                  </a>
+                  {/* Project Type Badge */}
+                  <div className="absolute top-2 right-2">
+                    <Badge className="bg-accent/90 text-accent-foreground backdrop-blur-sm text-xs">
+                      {project.type === 'web' ? 'Web App' : 'Mobile App'}
+                    </Badge>
+                  </div>
                 </div>
 
-                <p className="text-sm text-muted-foreground mb-4">
-                  {project.description}
-                </p>
-
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map((tech) => (
-                    <Badge
-                      key={tech}
-                      variant="secondary"
-                      className="text-xs bg-accent/10 text-accent-bright"
+                <div className="p-4">
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex items-center gap-2">
+                      {project.type === 'web' ? (
+                        <Globe className="w-4 h-4 text-accent-bright" />
+                      ) : (
+                        <Smartphone className="w-4 h-4 text-accent-bright" />
+                      )}
+                      <div>
+                        <h4 className="font-semibold text-sm group-hover:text-accent-bright transition-colors">
+                          {project.title}
+                        </h4>
+                        <p className="text-xs text-muted-foreground">{project.subtitle}</p>
+                      </div>
+                    </div>
+                    
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-1.5 rounded-full hover:bg-accent/20 transition-colors"
                     >
-                      {tech}
-                    </Badge>
-                  ))}
+                      <Github className="w-3.5 h-3.5 text-accent-bright" />
+                    </a>
+                  </div>
+
+                  <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
+                    {project.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-1">
+                    {project.tech.map((tech) => (
+                      <Badge
+                        key={tech}
+                        variant="secondary"
+                        className="text-xs bg-accent/10 text-accent-bright px-2 py-0.5"
+                      >
+                        {tech}
+                      </Badge>
+                    ))}
+                  </div>
                 </div>
               </Card>
             ))}
