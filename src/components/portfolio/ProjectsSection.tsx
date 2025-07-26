@@ -94,50 +94,60 @@ const ProjectsSection = () => {
           {projects.filter(p => p.featured).map((project, index) => (
             <Card
               key={project.id}
-              className="group bg-surface border-border hover:shadow-glow transition-all duration-500 hover:scale-105 overflow-hidden animate-fade-in-up"
+              className="group relative bg-surface border-border overflow-hidden animate-fade-in-up hover:border-accent/50 transition-all duration-300 hover:shadow-glow hover:-translate-y-2"
               style={{ animationDelay: `${index * 200}ms` }}
             >
               {/* Project Image */}
-              <div className="relative h-48 overflow-hidden">
+              <div className="relative h-48 overflow-hidden bg-gradient-to-br from-surface to-surface-elevated">
                 <img 
                   src={project.image} 
                   alt={`${project.title} preview`}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent opacity-60" />
+                <div className="absolute inset-0 bg-gradient-to-t from-surface/90 via-surface/20 to-transparent" />
+                
+                {/* Glow overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-accent opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
                 
                 {/* Project Type Badge */}
-                <div className="absolute top-4 right-4">
-                  <Badge className="bg-accent/90 text-accent-foreground backdrop-blur-sm">
+                <div className="absolute top-4 right-4 z-10">
+                  <Badge className="bg-accent/90 text-accent-foreground backdrop-blur-sm border border-accent/30 shadow-lg">
                     {project.type === 'web' ? 'Web App' : 'Mobile App'}
                   </Badge>
                 </div>
+
+                {/* Hover overlay with animated border */}
+                <div className="absolute inset-0 border-2 border-transparent group-hover:border-accent/30 transition-all duration-300 rounded-lg" />
               </div>
 
-              <div className="p-6">
+              <div className="p-6 relative z-10">
                 {/* Project Header */}
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center gap-3">
-                    {project.type === 'web' ? (
-                      <Globe className="w-5 h-5 text-accent-bright" />
-                    ) : (
-                      <Smartphone className="w-5 h-5 text-accent-bright" />
-                    )}
+                    <div className="p-2 rounded-lg bg-accent/20 group-hover:bg-accent/30 transition-colors duration-300">
+                      {project.type === 'web' ? (
+                        <Globe className="w-5 h-5 text-accent-bright" />
+                      ) : (
+                        <Smartphone className="w-5 h-5 text-accent-bright" />
+                      )}
+                    </div>
                     <div>
-                      <h3 className="text-lg font-bold group-hover:text-accent-bright transition-colors">
+                      <h3 className="text-lg font-bold group-hover:text-accent-bright transition-colors duration-300">
                         {project.title}
                       </h3>
-                      <p className="text-sm text-muted-foreground">{project.subtitle}</p>
+                      <p className="text-sm text-muted-foreground group-hover:text-muted-foreground/80 transition-colors duration-300">
+                        {project.subtitle}
+                      </p>
                     </div>
                   </div>
                   
-                  <Badge variant="secondary" className="bg-primary/20 text-primary text-xs">
+                  <Badge variant="secondary" className="bg-primary/20 text-primary text-xs border border-primary/30">
                     {project.role}
                   </Badge>
                 </div>
 
                 {/* Description */}
-                <p className="text-muted-foreground mb-4 leading-relaxed text-sm">
+                <p className="text-muted-foreground mb-4 leading-relaxed text-sm group-hover:text-foreground/90 transition-colors duration-300">
                   {project.description}
                 </p>
 
@@ -146,7 +156,7 @@ const ProjectsSection = () => {
                   {project.tech.map((tech) => (
                     <Badge
                       key={tech}
-                      className={`${getTechColor(tech)} border text-xs`}
+                      className={`${getTechColor(tech)} border transform group-hover:scale-105 transition-all duration-300`}
                     >
                       {tech}
                     </Badge>
@@ -160,10 +170,10 @@ const ProjectsSection = () => {
                       variant="gradient"
                       size="sm"
                       asChild
-                      className="group/btn flex-1"
+                      className="group/btn flex-1 hover:shadow-glow transition-all duration-300"
                     >
                       <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="w-4 h-4 mr-2 group-hover/btn:scale-110 transition-transform" />
+                        <ExternalLink className="w-4 h-4 mr-2 group-hover/btn:scale-110 group-hover/btn:rotate-12 transition-transform duration-300" />
                         Live Demo
                       </a>
                     </Button>
@@ -173,18 +183,22 @@ const ProjectsSection = () => {
                     variant="neon"
                     size="sm"
                     asChild
-                    className={`group/btn ${project.liveUrl ? 'flex-1' : 'w-full'}`}
+                    className={`group/btn transition-all duration-300 hover:shadow-glow ${project.liveUrl ? 'flex-1' : 'w-full'}`}
                   >
                     <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                      <Github className="w-4 h-4 mr-2 group-hover/btn:rotate-12 transition-transform" />
+                      <Github className="w-4 h-4 mr-2 group-hover/btn:rotate-12 group-hover/btn:scale-110 transition-transform duration-300" />
                       Code
                     </a>
                   </Button>
                 </div>
               </div>
               
-              {/* Hover Effect Overlay */}
-              <div className="absolute inset-0 bg-gradient-accent opacity-0 group-hover:opacity-5 transition-opacity duration-500" />
+              {/* Animated background glow effect */}
+              <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-accent/0 via-accent/5 to-accent/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              
+              {/* Corner glow effects */}
+              <div className="absolute top-0 left-0 w-20 h-20 bg-accent/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -translate-x-10 -translate-y-10" />
+              <div className="absolute bottom-0 right-0 w-16 h-16 bg-primary/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 translate-x-8 translate-y-8" />
             </Card>
           ))}
         </div>
