@@ -2,31 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Github, Linkedin, ArrowDown } from 'lucide-react';
 import profileImage from '@/assets/janith-new-profile.jpg';
-
 const HeroSection = () => {
   const [currentRole, setCurrentRole] = useState(0);
-  const roles = [
-    'Full-Stack Developer',
-    'Mobile App Developer', 
-    'Tech Enthusiast'
-  ];
-
+  const roles = ['Full-Stack Developer', 'Mobile App Developer', 'Tech Enthusiast'];
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentRole((prev) => (prev + 1) % roles.length);
+      setCurrentRole(prev => (prev + 1) % roles.length);
     }, 3000);
     return () => clearInterval(interval);
   }, []);
-
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({
+        behavior: 'smooth'
+      });
     }
   };
-
-  return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+  return <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Background gradient effects */}
       <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-primary/5" />
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-pulse" />
@@ -59,40 +52,21 @@ const HeroSection = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button 
-              variant="gradient" 
-              size="lg"
-              onClick={() => scrollToSection('projects')}
-              className="group"
-            >
+            <Button variant="gradient" size="lg" onClick={() => scrollToSection('projects')} className="group">
               View Projects
               <ArrowDown className="ml-2 w-4 h-4 group-hover:translate-y-1 transition-transform" />
             </Button>
-            <Button 
-              variant="neon" 
-              size="lg"
-              onClick={() => scrollToSection('contact')}
-            >
+            <Button variant="neon" size="lg" onClick={() => scrollToSection('contact')}>
               Contact Me
             </Button>
           </div>
 
           {/* Social Links */}
           <div className="flex space-x-6">
-            <a 
-              href="https://github.com/janithnavoda" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="p-3 rounded-full bg-surface-elevated hover:bg-accent/20 transition-all duration-300 hover:scale-110 hover:shadow-glow"
-            >
+            <a href="https://github.com/janithnavoda" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-surface-elevated hover:bg-accent/20 transition-all duration-300 hover:scale-110 hover:shadow-glow">
               <Github className="w-6 h-6 text-accent-bright" />
             </a>
-            <a 
-              href="https://linkedin.com/in/janithnavoda" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="p-3 rounded-full bg-surface-elevated hover:bg-accent/20 transition-all duration-300 hover:scale-110 hover:shadow-glow"
-            >
+            <a href="https://linkedin.com/in/janithnavoda" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-surface-elevated hover:bg-accent/20 transition-all duration-300 hover:scale-110 hover:shadow-glow">
               <Linkedin className="w-6 h-6 text-accent-bright" />
             </a>
           </div>
@@ -101,12 +75,8 @@ const HeroSection = () => {
         {/* Profile Image */}
         <div className="relative animate-fade-in">
           <div className="relative">
-            <img 
-              src={profileImage} 
-              alt="Janith Navoda" 
-              className="w-80 h-80 md:w-96 md:h-96 rounded-2xl object-cover mx-auto shadow-card"
-            />
-            <div className="absolute inset-0 rounded-2xl bg-gradient-accent opacity-20 animate-glow-pulse" />
+            <img src={profileImage} alt="Janith Navoda" className="w-80 h-80 md:w-96 md:h-96 rounded-2xl object-cover mx-auto shadow-card" />
+            
           </div>
           
           {/* Floating elements */}
@@ -121,8 +91,6 @@ const HeroSection = () => {
           <div className="w-1 h-3 bg-accent-bright rounded-full mt-2 animate-pulse" />
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default HeroSection;
