@@ -3,7 +3,6 @@ import Navigation from './Navigation';
 import HeroSection from './HeroSection';
 import AboutSection from './AboutSection';
 import ProjectsSection from './ProjectsSection';
-import ServicesSection from './ServicesSection';
 import ContactSection from './ContactSection';
 
 const Portfolio = () => {
@@ -14,7 +13,6 @@ const Portfolio = () => {
         <HeroSection />
         <AboutSection />
         <ProjectsSection />
-        <ServicesSection />
         <ContactSection />
       </main>
       
