@@ -90,7 +90,7 @@ const ProjectsSection = () => {
         </div>
 
         {/* Featured Projects Grid */}
-        <div className="grid lg:grid-cols-2 gap-8 mb-12">
+        <div className="grid lg:grid-cols-3 gap-6 mb-12">
           {projects.filter(p => p.featured).map((project, index) => (
             <Card
               key={project.id}
