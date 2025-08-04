@@ -45,8 +45,7 @@ const HeroSection = () => {
 
             <p className="text-lg text-muted-foreground max-w-lg">
               Motivated IT undergraduate passionate about creating innovative solutions 
-              through code. Specializing in full-stack development with the MERN stack 
-              and mobile app development.
+              through code. Specializing in full-stack development.
             </p>
           </div>
 
@@ -63,10 +62,10 @@ const HeroSection = () => {
 
           {/* Social Links */}
           <div className="flex space-x-6">
-            <a href="https://github.com/janithnavoda" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-surface-elevated hover:bg-accent/20 transition-all duration-300 hover:scale-110 hover:shadow-glow">
+            <a href="https://github.com/Janith-Navoda" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-surface-elevated hover:bg-accent/20 transition-all duration-300 hover:scale-110 hover:shadow-glow">
               <Github className="w-6 h-6 text-accent-bright" />
             </a>
-            <a href="https://linkedin.com/in/janithnavoda" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-surface-elevated hover:bg-accent/20 transition-all duration-300 hover:scale-110 hover:shadow-glow">
+            <a href="https://www.linkedin.com/in/janith-navoda-thilakasiri/" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-surface-elevated hover:bg-accent/20 transition-all duration-300 hover:scale-110 hover:shadow-glow">
               <Linkedin className="w-6 h-6 text-accent-bright" />
             </a>
           </div>

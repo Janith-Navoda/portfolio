@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { ExternalLink, Github, Smartphone, Globe } from 'lucide-react';
 
 // Project preview images
-import breezyFitsImg from '@/assets/project-breezy-fits.jpg';
+import breezyFitsImg from '@/assets/project-breezy-fits.png';
 import craftopiaImg from '@/assets/project-craftopia.jpg';
 import echannelingImg from '@/assets/project-echanneling.jpg';
 import financeTrackerImg from '@/assets/project-finance-tracker.jpg';
@@ -19,26 +19,15 @@ const ProjectsSection = () => {
       role: 'Full-Stack Developer',
       tech: ['MERN', 'Redux', 'Tailwind'],
       description: 'Feature-rich shopping experience with admin dashboard, JWT auth, payment integration.',
-      liveUrl: '#',
-      githubUrl: '#',
+      liveUrl: 'https://e-commerce-webapp-3dx9.vercel.app/',
+      githubUrl: 'https://github.com/Janith-Navoda/e-commerce-webapp',
       image: breezyFitsImg,
       type: 'web',
       featured: true
     },
+    
     {
       id: 2,
-      title: 'Craftopia',
-      subtitle: 'E-Commerce Platform',
-      role: 'Full-Stack Developer',
-      tech: ['MERN', 'Tailwind'],
-      description: 'Built from scratch with secure auth, dynamic inventory, order management.',
-      githubUrl: '#',
-      image: craftopiaImg,
-      type: 'web',
-      featured: true
-    },
-    {
-      id: 3,
       title: 'E-Channeling Website',
       subtitle: 'Healthcare Booking System',
       role: 'Team Developer',
@@ -49,8 +38,9 @@ const ProjectsSection = () => {
       type: 'web',
       featured: false
     },
+   
     {
-      id: 4,
+      id: 3,
       title: 'Finance Tracker',
       subtitle: 'Android App',
       role: 'Mobile Developer',
@@ -59,6 +49,18 @@ const ProjectsSection = () => {
       githubUrl: '#',
       image: financeTrackerImg,
       type: 'mobile',
+      featured: true
+    },
+     {
+      id: 4,
+      title: 'Craftopia',
+      subtitle: 'E-Commerce Platform',
+      role: 'Full-Stack Developer',
+      tech: ['MERN', 'Tailwind'],
+      description: 'Built from scratch with secure auth, dynamic inventory, order management.',
+      githubUrl: '#',
+      image: craftopiaImg,
+      type: 'web',
       featured: true
     }
   ];

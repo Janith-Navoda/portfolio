@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { Mail, Phone, Linkedin, Github, Send, MapPin } from 'lucide-react';
+import { Mail, Phone, Linkedin, Github, Send, MapPin, Twitter, Instagram } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
 const ContactSection = () => {
@@ -13,6 +13,7 @@ const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    subject: '', // <-- Added subject
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -38,6 +39,7 @@ const ContactSection = () => {
       const templateParams = {
         from_name: formData.name,
         from_email: formData.email,
+        subject: formData.subject, // <-- Added subject
         message: formData.message,
         to_name: 'Janith Navoda'
       };
@@ -53,7 +55,7 @@ const ContactSection = () => {
         description: "Thank you for reaching out. I'll get back to you soon!",
       });
       
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({ name: '', email: '', subject: '', message: '' }); // <-- Reset subject
     } catch (error) {
       console.error('EmailJS Error:', error);
       toast({
@@ -70,26 +72,51 @@ const ContactSection = () => {
     {
       icon: Mail,
       label: 'Email',
-      value: 'janith.navoda@example.com',
-      href: 'mailto:janith.navoda@example.com'
+      value: 'janithnavodatilakasiri@gmail.com',
+      href: 'mailto:janithnavodatilakasiri@gmail.com',
+      type: 'contact'
     },
     {
       icon: Phone,
       label: 'Phone',
-      value: '+94 77 123 4567',
-      href: 'tel:+94771234567'
+      value: '+94 74 166 8987',
+      href: 'tel:+94741668987',
+      type: 'contact'
+    },
+    {
+      icon: MapPin,
+      label: 'Address',
+      value: '23/28, Jayamawatha, Walawwaththa, Mirigama',
+      href: '#',
+      type: 'contact'
     },
     {
       icon: Linkedin,
       label: 'LinkedIn',
-      value: 'linkedin.com/in/janithnavoda',
-      href: 'https://linkedin.com/in/janithnavoda'
+      value: '',
+      href: 'https://www.linkedin.com/in/janith-navoda-thilakasiri/',
+      type: 'social'
     },
     {
       icon: Github,
       label: 'GitHub',
-      value: 'github.com/janithnavoda',
-      href: 'https://github.com/janithnavoda'
+      value: '',
+      href: 'https://github.com/Janith-Navoda',
+      type: 'social'
+    },
+    {
+      icon: Twitter,
+      label: 'Twitter',
+      value: '',
+      href: '#',
+      type: 'social'
+    },
+    {
+      icon: Instagram,
+      label: 'Instagram',
+      value: '',
+      href: '#',
+      type: 'social'
     }
   ];
 
@@ -103,7 +130,7 @@ const ContactSection = () => {
           </h2>
           <div className="w-24 h-1 bg-gradient-accent mx-auto mb-8" />
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Have a project in mind? Let's discuss how we can work together to bring your ideas to life.
+            I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
           </p>
         </div>
 
@@ -146,6 +173,19 @@ const ContactSection = () => {
               </div>
 
               <div className="space-y-2">
+                <Label htmlFor="subject">Subject</Label>
+                <Input
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleInputChange}
+                  placeholder="Subject of your message"
+                  required
+                  className="bg-surface-elevated border-border focus:border-accent-bright"
+                />
+              </div>
+
+              <div className="space-y-2">
                 <Label htmlFor="message">Message</Label>
                 <Textarea
                   id="message"
@@ -182,84 +222,65 @@ const ContactSection = () => {
           </Card>
 
           {/* Contact Info */}
-          <div className="space-y-8 animate-fade-in-up delay-200">
-            <Card className="p-8 bg-surface border-border hover:shadow-glow transition-all duration-300">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 rounded-full bg-primary/20">
-                  <MapPin className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="text-2xl font-semibold">Contact Information</h3>
+          <Card className="p-8 bg-surface border-border hover:shadow-glow transition-all duration-300 animate-fade-in-up delay-200 h-full flex flex-col">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-3 rounded-full bg-primary/20">
+                <MapPin className="w-6 h-6 text-primary" />
               </div>
+              <h3 className="text-2xl font-semibold">Contact Information</h3>
+            </div>
 
+            <div className="space-y-6 flex-1 flex flex-col">
               <div className="space-y-6">
                 {contactInfo.map((info, index) => (
-                  <a
-                    key={info.label}
-                    href={info.href}
-                    target={info.href.startsWith('http') ? '_blank' : undefined}
-                    rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    className="flex items-center gap-4 p-4 rounded-lg bg-surface-elevated hover:bg-accent/10 transition-all duration-300 group"
-                  >
-                    <div className="p-3 rounded-full bg-accent/20 group-hover:bg-accent/30 transition-colors">
-                      <info.icon className="w-5 h-5 text-accent-bright" />
-                    </div>
-                    <div>
-                      <p className="font-medium group-hover:text-accent-bright transition-colors">
-                        {info.label}
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        {info.value}
-                      </p>
-                    </div>
-                  </a>
+                  info.type === 'contact' ? (
+                    <a
+                      key={info.label}
+                      href={info.href}
+                      target={info.href.startsWith('http') ? '_blank' : undefined}
+                      rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                      className="flex items-center gap-4 p-4 rounded-lg bg-surface-elevated hover:bg-accent/10 transition-all duration-300 group"
+                    >
+                      <div className="p-3 rounded-full bg-accent/20 group-hover:bg-accent/30 transition-colors">
+                        <info.icon className="w-5 h-5 text-accent-bright" />
+                      </div>
+                      <div>
+                        <p className="font-medium group-hover:text-accent-bright transition-colors">
+                          {info.label}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          {info.value}
+                        </p>
+                      </div>
+                    </a>
+                  ) : null
                 ))}
               </div>
-            </Card>
-
-            {/* Quick Contact */}
-            <Card className="p-8 bg-gradient-surface border-border">
-              <h4 className="text-xl font-semibold mb-4">Quick Response</h4>
-              <p className="text-muted-foreground mb-6">
-                Typically respond within 24 hours. For urgent inquiries, feel free to reach out directly via phone or LinkedIn.
-              </p>
               
-              <div className="flex gap-4">
-                <Button 
-                  variant="neon" 
-                  asChild
-                  className="flex-1"
-                >
-                  <a href="tel:+94771234567">
-                    <Phone className="w-4 h-4 mr-2" />
-                    Call Now
-                  </a>
-                </Button>
-                
-                <Button 
-                  variant="outline" 
-                  asChild
-                  className="flex-1 border-accent/30 hover:bg-accent/10"
-                >
-                  <a href="https://linkedin.com/in/janithnavoda" target="_blank" rel="noopener noreferrer">
-                    <Linkedin className="w-4 h-4 mr-2" />
-                    LinkedIn
-                  </a>
-                </Button>
+              {/* Connect with me section */}
+              <div className="mt-auto pt-6 border-t border-border">
+                <h4 className="text-lg font-semibold text-center mb-4">Connect With Me</h4>
+                <div className="flex justify-center gap-4">
+                  {contactInfo
+                    .filter(info => info.type === 'social')
+                    .map((info) => (
+                      <a
+                        key={info.label}
+                        href={info.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-3 rounded-full bg-accent/20 hover:bg-accent/30 transition-all duration-300 group"
+                        title={info.label}
+                      >
+                        <info.icon className="w-6 h-6 text-accent-bright group-hover:scale-110 transition-transform" />
+                      </a>
+                    ))}
+                </div>
               </div>
-            </Card>
-          </div>
+            </div>
+          </Card>
         </div>
 
-        {/* Footer Note */}
-        <div className="text-center mt-16 animate-fade-in-up">
-          <div className="max-w-2xl mx-auto p-6 bg-surface-elevated rounded-lg border border-border">
-            <h4 className="font-semibold mb-2">Open to Opportunities</h4>
-            <p className="text-muted-foreground">
-              Currently seeking internship and entry-level opportunities in software development. 
-              Available for freelance projects and open-source collaborations.
-            </p>
-          </div>
-        </div>
       </div>
     </section>
   );

@@ -64,17 +64,35 @@ const AboutSection = () => {
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold">Education</h3>
-                  <p className="text-accent-bright">Graduation: 2026</p>
+                  <p className="text-accent-bright"></p>
                 </div>
               </div>
               
               <div>
-                <h4 className="font-semibold text-lg mb-2">BSc (Hons) in Information Technology</h4>
-                <p className="text-muted-foreground mb-2">Specialized in IT</p>
-                <p className="text-muted-foreground">Faculty of Computing, SLIIT</p>
+                <h4 className="font-semibold text-lg mb-2">Sri Lanka Institute of Information Technology</h4>
+                <p className="text-muted-foreground mb-2">BSc (Hons) Information Technology </p>
+                <p className="text-muted-foreground">Expected Graduation - 2026</p>
+              </div>
+
+              <br></br>
+
+              <div>
+                <h4 className="font-semibold text-lg mb-2"> D.S. Senanayake College, Colombo 07</h4>
+                <p className="text-muted-foreground mb-2">G.C.E (Advance Level)</p>
+                <p className="text-muted-foreground"></p>
+              </div>
+
+              <br></br>
+
+              <div>
+                <h4 className="font-semibold text-lg mb-2"> D.S. Senanayake College, Colombo 07</h4>
+                <p className="text-muted-foreground mb-2">G.C.E (Ordinary Level)</p>
+                <p className="text-muted-foreground"></p>
               </div>
             </Card>
           </div>
+
+
 
           {/* Skills Section */}
           <div className="space-y-8 animate-fade-in-up delay-200">
