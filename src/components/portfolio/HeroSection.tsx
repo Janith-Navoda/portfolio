@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Github, Linkedin, ArrowDown } from 'lucide-react';
+import { Github, Linkedin, ArrowDown, FileText } from 'lucide-react';
 import profileImage from '@/assets/janith-new-profile.jpg';
+
 const HeroSection = () => {
   const [currentRole, setCurrentRole] = useState(0);
   const roles = ['Full-Stack Developer', 'Mobile App Developer', 'Tech Enthusiast'];
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentRole(prev => (prev + 1) % roles.length);
     }, 3000);
     return () => clearInterval(interval);
   }, []);
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -19,7 +22,17 @@ const HeroSection = () => {
       });
     }
   };
-  return <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+
+  const handleResumeClick = () => {
+    // Replace this URL with your actual resume file path
+    // You can either:
+    // 1. Add your resume PDF to the public folder and use: '/resume.pdf'
+    // 2. Use an external link to your resume
+    window.open('/resume.pdf', '_blank');
+  };
+
+  return (
+    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Background gradient effects */}
       <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-primary/5" />
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-pulse" />
@@ -58,6 +71,10 @@ const HeroSection = () => {
             <Button variant="neon" size="lg" onClick={() => scrollToSection('contact')}>
               Contact Me
             </Button>
+            <Button variant="neon" size="lg" onClick={handleResumeClick} className="group">
+              <FileText className="mr-2 w-4 h-4" />
+              View Resume
+            </Button>
           </div>
 
           {/* Social Links */}
@@ -75,7 +92,6 @@ const HeroSection = () => {
         <div className="relative animate-fade-in">
           <div className="relative">
             <img src={profileImage} alt="Janith Navoda" className="w-80 h-80 md:w-96 md:h-96 rounded-2xl object-cover mx-auto shadow-card" />
-            
           </div>
           
           {/* Floating elements */}
@@ -90,6 +106,8 @@ const HeroSection = () => {
           <div className="w-1 h-3 bg-accent-bright rounded-full mt-2 animate-pulse" />
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default HeroSection;
