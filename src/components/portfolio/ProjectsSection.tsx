@@ -8,7 +8,7 @@ import { ExternalLink, Github, Smartphone, Globe } from 'lucide-react';
 import breezyFitsImg from '@/assets/project-breezy-fits.png';
 import craftopiaImg from '@/assets/project-craftopia.jpg';
 import echannelingImg from '@/assets/project-echanneling.jpg';
-import financeTrackerImg from '@/assets/project-finance-tracker.jpg';
+import financeTrackerImg from '@/assets/project-finance-tracker.png';
 
 const ProjectsSection = () => {
   const projects = [
@@ -46,7 +46,7 @@ const ProjectsSection = () => {
       role: 'Mobile Developer',
       tech: ['Kotlin'],
       description: 'Personal budgeting tool. Offline expense tracking, budget alerts, SharedPreferences.',
-      githubUrl: '#',
+      githubUrl: 'https://github.com/Janith-Navoda/finance-tracker-app',
       image: financeTrackerImg,
       type: 'mobile',
       featured: true
